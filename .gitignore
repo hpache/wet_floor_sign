@@ -3,3 +3,5 @@ dataset/dry/**-al*
 dataset/wet/**-al*
 dataset/dry/output
 dataset/wet/output
+dataset/test
+model_data/
