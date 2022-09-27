@@ -1,0 +1,6 @@
+Augmentor==0.2.10
+matplotlib==3.4.1
+numpy==1.23.3
+Pillow==9.2.0
+tensorflow==2.10.0
+tensorflow_macos==2.10.0
