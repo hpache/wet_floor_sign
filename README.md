@@ -30,13 +30,12 @@ If you are not on MacOS. Be sure to install
 - augmentor
 - matplotlib
 - tensorflow
-- numpy
 - pillow (optional)
 
 i.e. run the following command
 
 ```
-pip install numpy augmentor matplotlib tensorflow numpy
+pip install numpy augmentor matplotlib tensorflow
 ```
 
 
