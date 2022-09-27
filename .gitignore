@@ -1,2 +1,5 @@
 .DS_Store
-
+dataset/dry/**-al*
+dataset/wet/**-al*
+dataset/dry/output
+dataset/wet/output
