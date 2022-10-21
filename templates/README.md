@@ -3,3 +3,6 @@
 
 ## Description
 This directory contains the html templates for the frontend. The templates were created using bootstrap 3 along with some custom classes for background color, text options, and so on.
+
+## Viewing
+You can view locally or by clicking [here](https://htmlpreview.github.io/?https://github.com/hpache/wet_floor_sign/blob/feature/frontend/templates/index.html).
