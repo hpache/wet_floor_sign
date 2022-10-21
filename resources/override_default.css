@@ -1,0 +1,24 @@
+.box{
+    width:1140px;
+    height: 400px;
+    background-color: black;
+    text-align: center;
+    color: white;
+    font-size: 30px;
+}
+
+.camera-buttons{
+    background-color: #12ABDB;
+}
+
+.logging-table{
+    background-color: rgba(128, 128, 128, 0.59);
+}
+.contact-card{
+    background-color: rgba(0, 0, 255, 0.468);
+}
+
+.page{
+    background-color: #0070AD;
+    color: black;
+}
