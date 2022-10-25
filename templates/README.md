@@ -7,5 +7,5 @@ This directory contains the html templates for the frontend. The templates were 
 ## Viewing
 You can view locally or by clicking the following links
 
-- [v1](https://htmlpreview.github.io/?https://github.com/hpache/wet_floor_sign/blob/feature/frontend/templates/index.html).
-- [v2] (https://htmlpreview.github.io/?https://github.com/hpache/wet_floor_sign/blob/feature/frontend/templates/index_v2.html)
+- [v1](https://htmlpreview.github.io/?https://github.com/hpache/wet_floor_sign/blob/feature/frontend/templates/index.html)
+- [v2](https://htmlpreview.github.io/?https://github.com/hpache/wet_floor_sign/blob/feature/frontend/templates/index_v2.html)
