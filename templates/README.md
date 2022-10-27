@@ -8,4 +8,7 @@ This directory contains the html templates for the frontend. The templates were 
 You can view locally or by clicking the following link
 
 
-- [current_version](https://htmlpreview.github.io/?https://github.com/hpache/wet_floor_sign/blob/feature/frontend/templates/index_v2.html)
+- [current_version](https://htmlpreview.github.io/?https://github.com/hpache/wet_floor_sign/blob/feature/frontend/templates/index.html)
+
+
+Keep in mind that this will only render the HTML file. Any local js script attached to the HTML file will not work.
