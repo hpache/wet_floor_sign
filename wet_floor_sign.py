@@ -1,6 +1,6 @@
 '''
 Henry Pacheco Cachon
-7 October 2022
+25 October 2022
 
 Class represents an object that detects spills through a webcam stream
 '''
