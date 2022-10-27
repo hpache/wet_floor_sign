@@ -4,3 +4,4 @@ dataset/wet/**-al*
 dataset/dry/output
 dataset/wet/output
 model_data/
+__pycache__/
