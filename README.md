@@ -16,7 +16,7 @@ Currently, the model is on its first iteration. Improvements can be made by modi
 
 ## How to run
 
-**JUPYTER REQUIRED**
+### Jupyter Notebooks
 
 Make sure you have installed the necessary packages! If you are on MacOS run the following commands
 
@@ -39,6 +39,29 @@ pip install numpy augmentor matplotlib tensorflow
 ```
 
 
-## View 
+
+#### View Notebooks
 
 If you wish to just view the code, just click on the ipynb files through GitHub. Fortunately, GitHub renders jupyter notebooks on their site.
+
+### Flask Application
+
+#### Requirements
+
+In order to run the flask application, please be sure to install flask on python:
+
+``` pip install flask ```
+
+You will also need to install the libraries referenced in the **Jupyter Notebooks** section.
+
+#### Running
+
+In order to run the application, you would need to open a terminal (or powershell for windows users). CD into the github repo and run one of the following commands:
+
+
+1. ``` flask run -h localhost -p 8080 ```
+2. ``` python3.x app.py ```
+
+Note, the x should be replaced by the version of Python3 that you are running. For example, if you have Python 3.9 then you should run ``` python3.9 app.py ```
+
+Navigate to ``` localhost:8080 ``` on a web browser to see the webpage
