@@ -2,7 +2,7 @@
 
 **Created:** 30 September 2022
 
-**Input** (200,200,3) rgb photo from webcame scaled down to 200x200 pixels. 
+**Input** (200,200,3) rgb photo from webcam scaled down to 200x200 pixels.
 Max accuracy was roughly 95% (rounding up).
 
 # Layout
