@@ -6,7 +6,6 @@ This class is responsible for handling camera streams from opencv2
 '''
 import cv2
 
-
 class Camera:
 
     def __init__(self, camera_urls = None):
@@ -41,6 +40,20 @@ class Camera:
             else:
                 break
     
+
+    def get_current_cam(self):
+        '''
+        Returns
+        ------------
+        String: Camera string 
+        Int: If using a webcam, the method returns 0
+        '''
+
+
+        if self.cameras != None:
+            return self.cameras[self.current_camera]
+        else:
+            return 0
     
     def next(self):
         '''
@@ -61,3 +74,15 @@ class Camera:
         if self.cameras != None:
             self.current_camera = (self.current_camera - 1) % (len(self.cameras))
             self.capture = cv2.VideoCapture(self.cameras[self.current_camera])
+    
+
+    def getPhoto(self):
+        '''
+        Returns
+        ----------
+        img: ndarray
+        '''
+
+        success, img = self.capture.read()
+
+        return img

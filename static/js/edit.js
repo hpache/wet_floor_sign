@@ -44,8 +44,8 @@ $(document).ready(function(){
 
     // Handles Prev button click event
     $("#Prev").click(function(){
-        console.log("Show previous camera");
-    })
+        console.log("Show previous camera!");
+    });
 
 
     // Handles Next button click event
@@ -81,5 +81,47 @@ $(document).ready(function(){
         console.log("Update the model!");
       
     })
+
+
+    function create_row(json_response){
+
+        var camera_num = json_response.camera
+        var time = json_response.timestamp
+
+        var table = $("#data");
+        var row = $("<tr class='table-danger'>");
+        var camera_data = $(`<td>${camera_num}</td>`);
+        var hazard = $("<td>Water</td>");
+        var status = $("<td class='status'>Unresolved</td>");
+        var time_data = $(`<td>${time}</td>`);
+
+
+        camera_data.appendTo(row)
+        hazard.appendTo(row)
+        status.appendTo(row)
+        time_data.appendTo(row)
+        row.appendTo(table);
+        
+    }
+
+
+    function check_floor(){
+        $.getJSON('/classify_feed',
+            function(data){
+
+                if (data.wet == true){
+                    create_row(data);
+                }
+            });
+        
+            return false
+    }
+    check_floor()
+    setInterval(check_floor, 60 * 1000);
+
+    if ($("#update").find.length > 0){
+        current_form.find('#update').remove();
+    }
+
 
 })
