@@ -11,11 +11,12 @@ import tensorflow as tf
 import numpy as np
 from datetime import datetime
 import pytz
+import os
 
 
 class WetFloorSign:
 
-    def __init__(self, model_path = './models/version3/'):
+    def __init__(self, model_path = './models/version4/'):
         '''
         Parameters:
         -------------
@@ -28,6 +29,22 @@ class WetFloorSign:
         self.photo_paths = []
 
     
+    def update(self, response):
+        updated_paths = {}
+
+        for old_path in response:
+            
+            new_status = response[old_path]
+
+            if new_status == "False Positive":
+                os.rename(old_path, f'./static/photos/retrain_data/dry/{old_path.split("/")[-1]}')
+                updated_paths[old_path] = f'./static/photos/retrain_data/dry/{old_path.split("/")[-1]}'
+            else:
+                os.rename(old_path, f'./static/photos/retrain_data/wet/{old_path.split("/")[-1]}')
+                updated_paths[old_path] = f'./static/photos/retrain_data/wet/{old_path.split("/")[-1]}'
+        
+        return updated_paths
+
 
     def classify(self, image, camera_num):
         '''
@@ -38,21 +55,23 @@ class WetFloorSign:
         image: numpy.ndarray returned from cv2.VideoCapture.read()
         '''
         if image.any() != None:
-            image_input = cv2.resize(image, (200,200))
+            image_input = cv2.resize(image, (300,300))
             image_arr = np.asarray(image_input)
             model_estimate = self.model.predict(np.array([image_arr]))
             prediction = self.categories[model_estimate.argmax()]
 
             if prediction == "wet":
                 time_capt = datetime.now(pytz.utc)
-                file_path = f'./retrain_data/tmp/{self.photo_point}.jpg'
+                file_path = f'./static/photos/retrain_data/tmp/{self.photo_point}.jpg'
                 cv2.imwrite(file_path, image)
                 self.photo_paths.append(file_path)
                 self.photo_point += 1
+                
                 return {"wet":True,  
-                        "timestamp": f'{time_capt.hour}:{time_capt.minute} GMT',
+                        "timestamp": f'{time_capt.hour}:{time_capt.minute:02d} GMT',
                         "camera": camera_num,
-                        "hash": f'{self.photo_point - 1}'}
+                        "hash": f'{self.photo_point - 1}',
+                        "path": file_path}
             else:
 
                 return {"wet": False}

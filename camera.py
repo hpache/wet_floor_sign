@@ -11,12 +11,15 @@ class Camera:
     def __init__(self, camera_urls = None):
         
         if camera_urls == None:
-            self.capture = cv2.VideoCapture(0)
-            self.cameras = None
+            self.capture = None
+            self.cameras = [0]
+            self.num_cams = 1
+            self.current_camera = 0
         else:
             self.cameras = camera_urls
-            self.capture = cv2.VideoCapture(camera_urls[0])
+            self.capture = None
             self.current_camera = 0
+            self.num_cams = len(self.cameras)
     
 
     def stream(self):
@@ -25,7 +28,7 @@ class Camera:
         ---------
         Encoded image for flask template
         '''
-
+        self.capture = cv2.VideoCapture(self.cameras[self.current_camera])
         while True:
         
             success,frame = self.capture.read()
@@ -40,8 +43,26 @@ class Camera:
             else:
                 break
     
+    
+    def setNumberCameras(self, num_cams):
+        '''
+        Parameters
+        --------------
+        num_cams: int -> The number of cameras 
+        '''
+        self.num_cams = num_cams
+    
 
-    def get_current_cam(self):
+    def setCameraUrls(self, camera_urls):
+        '''
+        Parameters
+        -------------
+        camera_uris: List[Str] -> A list of all the camera url strings
+        '''
+        self.cameras = camera_urls
+
+
+    def getCurrentCamera(self):
         '''
         Returns
         ------------
@@ -54,6 +75,15 @@ class Camera:
             return self.cameras[self.current_camera]
         else:
             return 0
+    
+
+    def getNumberCameras(self):
+        '''
+        Returns
+        ----------
+        int -> Number of cameras
+        '''
+        return self.num_cams
     
     def next(self):
         '''

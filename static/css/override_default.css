@@ -26,3 +26,9 @@ body{
     background-color: #0070AD;
     color: black;
 }
+
+img.classified{
+    position: fixed;
+    display: none;
+    pointer-events: none;
+}
