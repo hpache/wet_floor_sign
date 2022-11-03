@@ -16,7 +16,7 @@ import os
 
 class WetFloorSign:
 
-    def __init__(self, model_path = './models/version4/'):
+    def __init__(self, model_path = './models/version5/'):
         '''
         Parameters:
         -------------

@@ -19,8 +19,18 @@
 
 .sign-in {
     grid-row: 2;
-    grid-column: 2;
+    grid-column: 3;
 
+}
+
+.logo {
+    grid-row: 2;
+    grid-column: 1;
+}
+
+img{
+    width: 200px;
+    height: 200px;
 }
 
 fieldset {
