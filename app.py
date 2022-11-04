@@ -4,14 +4,22 @@ Created 27 October 2022
 
 
 from flask import Flask, redirect, render_template, Response, jsonify, request, url_for
-from tensorflow.python.framework.ops import re
-from werkzeug.wrappers import response
+from flask_mail import Mail, Message
 import camera
 import wet_floor_sign
 
 app = Flask(__name__)
 cam = camera.Camera()
 ml = wet_floor_sign.WetFloorSign()
+
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = 'spillzy2022@gmail.com'
+app.config['MAIL_PASSWORD'] = 'dgdwniangbxwnmbt'
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+
+mail = Mail(app)
 
 @app.route('/')
 def index():
@@ -42,13 +50,19 @@ def video_feed():
 @app.route('/classify_feed')
 def classify_feed():
     response = ml.classify(cam.getPhoto(), cam.getCurrentCamera())
+    if response['wet'] == True:
+        msg = Message(subject='Wet Floor Detected!', sender='spillzy2022@gmail.com', recipients=['shenryp78@gmail.com'])
+        msg.body = f'Camera {response["camera"]} detected a wet floor on {response["timestamp"]}'
+        mail.send(msg)
     return jsonify(response)
 
 
 @app.route('/update', methods=['POST'])
 def update():
     response_dict = request.get_json('ajax')
-    return jsonify(ml.update(response_dict))
+    classification = ml.update(response_dict) 
+
+    return jsonify(classification)
 
 
 
