@@ -1,0 +1,66 @@
+.wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: center;
+    justify-items: center;
+    text-align: center;
+
+}
+
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-row: 1;
+    grid-column: 2;
+}
+
+
+.sign-in {
+    grid-row: 2;
+    grid-column: 3;
+
+}
+
+.logo {
+    grid-row: 2;
+    grid-column: 1;
+}
+
+img{
+    width: 200px;
+    height: 200px;
+}
+
+fieldset {
+    background-color: #0070AD;
+    border: 2px black solid;
+    width: 150%;
+    height: 100%;
+}
+
+legend {
+    background-color: white;
+    border: 1px black solid;
+}
+
+input[type=submit]{
+    background-color: limegreen;
+    color: white;
+    border: 1px limegreen solid;
+    transition-duration: 0.4s;
+}
+
+input[type=submit]:hover{
+    background-color: white;
+    color: limegreen;
+}
+
+button[type=button]{
+    background-color: white;
+    color: black;
+    border: none;
+    transition-duration: 0.4s;
+}
+
