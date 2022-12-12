@@ -113,7 +113,7 @@ class Camera:
         '''
 
         if self.cameras != None:
-
+            self.capture.release()
             self.current_camera = (self.current_camera + 1) % (len(self.cameras))
             self.capture = cv2.VideoCapture(self.cameras[self.current_camera])
 
