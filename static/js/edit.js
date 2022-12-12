@@ -157,7 +157,7 @@ $(document).ready(function(){
             return false
     }
     
-    setInterval(check_floor, 60 * 1000);
+    setInterval(check_floor, 30 * 1000);
 
     if ($("#update").find.length > 0){
         current_form.find('#update').remove();

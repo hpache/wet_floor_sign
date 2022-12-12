@@ -23,17 +23,24 @@ mail = Mail(app)
 
 @app.route('/')
 def index():
+    cam.switchState(1)
     return render_template('index.html')
 
 @app.route('/login', methods=['GET','POST'])
 def login():
+    cam.switchState(0)
+    response_dict = request.get_json('ajax')
 
-    if len(list(request.form)) > 0:
-        numCams = int(request.args.get("numCams"))
-        cam_urls = [request.args.get(str(i+1)) for i in range(numCams)]
+    print(response_dict)
+    
+    if response_dict['numCams'] > 0:
+        numCams = response_dict['numCams']
+        cam_urls = response_dict['urls']
         cam.setCameraUrls(cam_urls)
         cam.setNumberCameras(numCams)
-    return redirect(url_for('guard'))
+
+    
+    return jsonify({'url':url_for('guard'), 'redirect': True})
 
 @app.route('/guard', methods=['GET', 'POST'])
 def guard():
@@ -53,7 +60,8 @@ def classify_feed():
     if response['wet'] == True:
         msg = Message(subject='Wet Floor Detected!', sender='spillzy2022@gmail.com', recipients=['shenryp78@gmail.com'])
         msg.body = f'Camera {response["camera"]} detected a wet floor on {response["timestamp"]}'
-        mail.send(msg)
+        # mail.send(msg)
+        print("Sent!")
     return jsonify(response)
 
 
@@ -67,6 +75,6 @@ def update():
 
 
 if __name__ == "__main__":
-    app.run(host='localhost', port=8080, debug=True)
+    app.run(host='localhost', port=8080, debug=False)
 
 

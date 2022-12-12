@@ -15,11 +15,14 @@ class Camera:
             self.cameras = [0]
             self.num_cams = 1
             self.current_camera = 0
+            self.local = True
         else:
             self.cameras = camera_urls
             self.capture = None
             self.current_camera = 0
             self.num_cams = len(self.cameras)
+            self.survey = False
+        
     
 
     def stream(self):
@@ -29,19 +32,29 @@ class Camera:
         Encoded image for flask template
         '''
         self.capture = cv2.VideoCapture(self.cameras[self.current_camera])
-        while True:
+        while self.survey:
         
             success,frame = self.capture.read()
+            self.frame = frame
 
             if success:
 
                 ret, buffer = cv2.imencode('.jpg', frame)
                 frame = buffer.tobytes()
-                yield (b'--frame\r\n'
-                    b'Content-Type image/jpeg\r\n\r\n' + frame + b'\r\n')
+
+                if self.local:
+                    yield (b'--frame\r\n'
+                        b'Content-Type image/jpeg\r\n\r\n' + frame + b'\r\n')
+                else:
+                    yield (b'--frame\r\n'
+                        b'Content-Type:image/jpeg\r\n'
+                        b'Content-Length: ' + f"{len(frame)}".encode() + b'\r\n'
+                        b'\r\n' + frame + b'\r\n')
     
             else:
                 break
+        
+        self.capture.release()
     
     
     def setNumberCameras(self, num_cams):
@@ -60,6 +73,15 @@ class Camera:
         camera_uris: List[Str] -> A list of all the camera url strings
         '''
         self.cameras = camera_urls
+
+    
+    def switchState(self, switch):
+        
+        if switch == 1:
+            self.survey = False
+        else:
+            self.survey = True
+
 
 
     def getCurrentCamera(self):
@@ -114,5 +136,5 @@ class Camera:
         '''
 
         success, img = self.capture.read()
-
-        return img
+        print(img)
+        return self.frame

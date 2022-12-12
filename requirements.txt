@@ -4,3 +4,5 @@ numpy==1.23.3
 Pillow==9.2.0
 tensorflow==2.10.0
 tensorflow_macos==2.10.0
+opencv_python==4.5.4.60
+pytz==2021.1
